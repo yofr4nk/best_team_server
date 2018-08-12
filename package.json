@@ -1,0 +1,36 @@
+{
+  "name": "best_team_server",
+  "version": "1.0.0",
+  "description": "The best team test to smartBoxTV ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha  ./test --recursive",
+    "test:watch": "mocha  ./test --recursive --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yofr4nk/best_team_server.git"
+  },
+  "author": "Yofrank S.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yofr4nk/best_team_server/issues"
+  },
+  "homepage": "https://github.com/yofr4nk/best_team_server#readme",
+  "dependencies": {
+    "koa": "^2.0.1",
+    "koa-bodyparser": "^4.1.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.0.1",
+    "lodash": "^4.17.4",
+    "mocha": "^5.0.0",
+    "mongoose": "^5.2.7",
+    "node-fetch": "^2.2.0",
+    "path": "^0.12.7",
+    "unit.js": "^2.0.0",
+    "xml2json": "^0.11.2"
+  }
+}

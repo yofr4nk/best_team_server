@@ -1,0 +1,15 @@
+version: '2'
+services:
+  team-server:
+    container_name: team-server
+    build: .
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - dbmongo
+      
+  dbmongo: 
+    image: mongo

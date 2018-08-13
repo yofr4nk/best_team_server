@@ -24,6 +24,9 @@ git clone https://github.com/yofr4nk/best_team_server.git
 docker-compose up
 ```
 
+After to install the app, you can go to:
+```http://localhost:3001/api/teams```
+
 ### To run tests
 - make sure you have run docker-compose before run tests.
 - The test run inside container: 

@@ -11,10 +11,10 @@ Things what you need to install the server
 
 Koa | Node | Npm
 --- | --- | ---
-***2.0.1*** | ***=8.9*** | ***=5.6.0***
+***2.0.1*** | ***=8.9*** | ***5.6.0***
 
 ### Get started
-- clone project
+- Clone the project
 ```
 git clone https://github.com/yofr4nk/best_team_server.git
 ```

@@ -44,18 +44,14 @@ const getPlayersPosition = async (ctx) => {
 }
 
 const getPlayerFromTeams = (teams) => {
-  try {
-    const teamsLength = teams.length;
-    const playersToGet = [];
-    for(let i = 0; i < teamsLength; i++) {
-      if(teams[i].players.length > 0) {
-        playersToGet.push(teams[i].players);
-      }
+  const teamsLength = teams.length;
+  const playersToGet = [];
+  for(let i = 0; i < teamsLength; i++) {
+    if(teams[i].players.length > 0) {
+      playersToGet.push(teams[i].players);
     }
-    return head(playersToGet);
-  } catch(err) {
-    return new Error(err);
   }
+  return head(playersToGet);
 }
 
 module.exports = {

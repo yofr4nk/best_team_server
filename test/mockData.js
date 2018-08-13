@@ -1,32 +1,81 @@
-const expectedPlayers = [ 
-  { 
-    id: '1',
+const expectedPlayers = [ { id: '1',
     name: 'Joaquin',
     position: 'Delantero',
-    _externalId: '1' },
+    _externalId: '1' 
+  },
   { 
     id: '2',
     name: 'Nicolas',
     position: 'Defensa',
-    _externalId: '1' },
+    _externalId: '2' 
+  },
   { 
     id: '3',
     name: 'Jonathan',
     position: 'Portero',
-    _externalId: '1' },
-  { id: '4', name: 'Boris', position: 'Portero', _externalId: '1' },
+    _externalId: '3' 
+  },
+  { id: '4', name: 'Boris', position: 'Portero', _externalId: '4' },
   { 
     id: '5',
     name: 'Carlos',
     position: 'Delantero',
-    _externalId: '4' },
-  { id: '6', name: 'Jorge', position: 'Defensa', _externalId: '4' },
+    _externalId: '5' 
+  },
+  { id: '6', name: 'Jorge', position: 'Defensa', _externalId: '6' },
   { 
     id: '7',
     name: 'Richart',
     position: 'Portero',
-    _externalId: '4' } 
-];
+    _externalId: '7' }];
+
+const expectedPlayersWithParents = [ { id: '1',
+    name: 'Joaquin',
+    position: 'Delantero',
+    _externalId: '1',
+    teamId: '1' 
+  },
+  { 
+    id: '2',
+    name: 'Nicolas',
+    position: 'Defensa',
+    _externalId: '2',
+    teamId: '1' 
+  },
+  { 
+    id: '3',
+    name: 'Jonathan',
+    position: 'Portero',
+    _externalId: '3',
+    teamId: '1' 
+  },
+  { 
+    id: '4',
+    name: 'Boris',
+    position: 'Portero',
+    _externalId: '4',
+    teamId: '1' 
+  },
+  { 
+    id: '5',
+    name: 'Carlos',
+    position: 'Delantero',
+    _externalId: '5',
+    teamId: '4' 
+  },
+  { 
+    id: '6',
+    name: 'Jorge',
+    position: 'Defensa',
+    _externalId: '6',
+    teamId: '4' 
+  },
+  { 
+    id: '7',
+    name: 'Richart',
+    position: 'Portero',
+    _externalId: '7',
+    teamId: '4' }];
 
 const teamObjectWithChilds = { 
   '1':[ 
@@ -150,8 +199,28 @@ const jsonDataMock = {
   }
 }
 
+const mongoTeamMockData = [ 
+  { players: 
+    [ "5b70fce3821cf0002f87c2b6",
+      "5b70fce3821cf0002f87c2b7",
+      "5b70fce3821cf0002f87c2b8",
+      "5b70fce3821cf0002f87c2b9" ],
+    _id: "5b70fce3821cf0002f87c2bd",
+    _externalId: '1',
+    name: 'Audax Italiano',
+    active: true },
+  { 
+    players: [],
+    _id: "5b70fce3821cf0002f87c2be",
+    _externalId: '2',
+    name: 'Cobresal',
+    active: true
+  }];
+
 module.exports = {
   expectedPlayers,
   teamObjectWithChilds,
-  jsonDataMock
+  jsonDataMock,
+  expectedPlayersWithParents,
+  mongoTeamMockData
 }

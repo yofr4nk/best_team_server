@@ -82,20 +82,15 @@ const pushPlayerToTeam = (teams, playerTeamRelation) => {
 }
 
 const buildTeamDataToSet = (players, playerData) => {
-  try {
-    const teamPlayerReducer = playerData.reduce((playerGroup, player) => {
-      const findPlayer = find(players, {_externalId: player._externalId});
-      if(!playerGroup[player.teamId]) {
-        playerGroup[player.teamId] = [];
-      }
-      playerGroup[player.teamId].push(findPlayer._id);
-      return playerGroup;
-    }, {});
-    return teamPlayerReducer;
-  } catch(err) {
-    console.log(err);
-    return new Error(err);
-  }
+  const teamPlayerReducer = playerData.reduce((playerGroup, player) => {
+    const findPlayer = find(players, {_externalId: player._externalId});
+    if(!playerGroup[player.teamId]) {
+      playerGroup[player.teamId] = [];
+    }
+    playerGroup[player.teamId].push(findPlayer._id);
+    return playerGroup;
+  }, {});
+  return teamPlayerReducer;
 }
 
 const saveTeamList = async (teamsFromXml, teamstoSave, playersToSet) => {
@@ -130,5 +125,10 @@ const setTeamToPlayers = (teams) => {
 module.exports = {
   runSeedFromXmlData,
   playersByTeam,
-  pushParentToPlayers
+  pushParentToPlayers,
+  getTeamData,
+  parseTeamToObject,
+  buildTeamSchemaDataPlayers,
+  buildTeamDataToSet,
+  pushPlayerToTeam
 }

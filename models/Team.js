@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+delete mongoose.connection.models['Team'];
 const TeamSchema = new mongoose.Schema({
   "_externalId": {
     type: String
@@ -14,8 +15,7 @@ const TeamSchema = new mongoose.Schema({
       ref: 'Player' 
     })
   }
-},
-{ toObject : {virtuals: true} }, { toJSON: { virtuals: true } });
+});
 
 const Team = mongoose.model('Team', TeamSchema);
 

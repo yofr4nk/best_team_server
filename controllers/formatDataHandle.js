@@ -59,7 +59,7 @@ const runSeedFromXmlData = async (ctx) => {
     Team.remove({})
   ]).then(async () => {
     const data = await getXmldata();
-    const getTeams = getTeamData(mockData.sport.team);
+    const getTeams = getTeamData(data.sport.team);
     const players = await insertPlayers(playersByTeam(data.sport.team));
     return saveTeamList(data.sport.team, getTeams, players)
       .then((teams) => {

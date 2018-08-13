@@ -2,10 +2,11 @@ version: '2'
 services:
   team-server:
     container_name: team-server
-    build: .
+    image: node:8.9
+    working_dir: /usr/src/app/
+    command: bash -c 'yarn install && yarn start'
     volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
+      - ./:/usr/src/app/
     ports:
       - "3001:3001"
     depends_on:

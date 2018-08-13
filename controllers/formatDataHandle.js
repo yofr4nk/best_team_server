@@ -59,7 +59,7 @@ const runSeedFromXmlData = async (ctx) => {
     Team.remove({})
   ]).then(async () => {
     const data = await getXmldata();
-    const getTeams = getTeamData(mockData.sport.team);
+    const getTeams = getTeamData(data.sport.team);
     const players = await insertPlayers(playersByTeam(data.sport.team));
     return saveTeamList(data.sport.team, getTeams, players)
       .then((teams) => {
@@ -82,20 +82,15 @@ const pushPlayerToTeam = (teams, playerTeamRelation) => {
 }
 
 const buildTeamDataToSet = (players, playerData) => {
-  try {
-    const teamPlayerReducer = playerData.reduce((playerGroup, player) => {
-      const findPlayer = find(players, {_externalId: player._externalId});
-      if(!playerGroup[player.teamId]) {
-        playerGroup[player.teamId] = [];
-      }
-      playerGroup[player.teamId].push(findPlayer._id);
-      return playerGroup;
-    }, {});
-    return teamPlayerReducer;
-  } catch(err) {
-    console.log(err);
-    return new Error(err);
-  }
+  const teamPlayerReducer = playerData.reduce((playerGroup, player) => {
+    const findPlayer = find(players, {_externalId: player._externalId});
+    if(!playerGroup[player.teamId]) {
+      playerGroup[player.teamId] = [];
+    }
+    playerGroup[player.teamId].push(findPlayer._id);
+    return playerGroup;
+  }, {});
+  return teamPlayerReducer;
 }
 
 const saveTeamList = async (teamsFromXml, teamstoSave, playersToSet) => {
@@ -130,5 +125,10 @@ const setTeamToPlayers = (teams) => {
 module.exports = {
   runSeedFromXmlData,
   playersByTeam,
-  pushParentToPlayers
+  pushParentToPlayers,
+  getTeamData,
+  parseTeamToObject,
+  buildTeamSchemaDataPlayers,
+  buildTeamDataToSet,
+  pushPlayerToTeam
 }

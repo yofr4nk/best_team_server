@@ -1,6 +1,7 @@
 const path = require('path');
 const {Team} = require(path.resolve('models', 'Team'));
-
+const {Player} = require(path.resolve('models', 'Player'));
+const {head} = require('lodash');
 const getTeams = async (ctx) => {
   ctx.body = {
     teams: await Team.find()
@@ -19,7 +20,7 @@ const getTeamPlayers = async (ctx) => {
 }
 
 const getPlayersPosition = async (ctx) => {
-  ctx.body = ctx.params.position;
+  const playerPosition = ctx.params.position;
   return new Promise(function(resolve, reject) {
     if(!ctx.params.position) return reject('You need pass a position');
     const teams = Team.find({
@@ -27,12 +28,35 @@ const getPlayersPosition = async (ctx) => {
     });
     return resolve(teams);
   }).then(activeTeam => {
-    ctx.body = activeTeam;
+    return getPlayerFromTeams(activeTeam);
+  }).then(filterPlayers => {
+    return Player.find({
+      _id: filterPlayers,
+      position: playerPosition
+    }).populate('team');
+  })
+  .then(players => {
+    ctx.body = players;
+  })
+  .catch(err => {
+    return new Error(err);
   });
+}
+
+const getPlayerFromTeams = (teams) => {
+  const teamsLength = teams.length;
+  const playersToGet = [];
+  for(let i = 0; i < teamsLength; i++) {
+    if(teams[i].players.length > 0) {
+      playersToGet.push(teams[i].players);
+    }
+  }
+  return head(playersToGet);
 }
 
 module.exports = {
   getTeams,
   getTeamPlayers,
-  getPlayersPosition
+  getPlayersPosition,
+  getPlayerFromTeams
 }

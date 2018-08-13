@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+delete mongoose.connection.models['Player'];
 const PlayerSchema = new mongoose.Schema({
   "_externalId": {
     type: String
@@ -14,14 +15,6 @@ const PlayerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Team'
   }
-},
-{ toObject : {virtuals: true} }, { toJSON: { virtuals: true } });
-
-PlayerSchema.virtual('teamParent', {
-  ref: 'Team',
-  localField: 'team',
-  foreignField: '_id',
-  justOne: false
 });
 
 const Player = mongoose.model('Player', PlayerSchema);
@@ -34,17 +27,7 @@ const insertPlayers = (players) => {
   }
 }
 
-const appendTeamToPlayer = (teams) => {
-  /*try{
-    return Team.insertMany(teams);
-  } catch(err) {
-    console.log(err);
-  }*/
-  return [];
-}
-
 module.exports = {
   Player,
-  insertPlayers,
-  appendTeamToPlayer
+  insertPlayers
 }
